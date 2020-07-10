@@ -1,0 +1,22 @@
+<div>
+    <div class="card">
+        <div class="card-header">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                </div>
+                <select class="form-control" name="country" [(ngModel)]="country" (change)="loadData($event)">
+                    <option [ngValue]="null" selected>Elige un País</option>
+                    <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+                  </select>
+            </div>
+        </div>
+        <div class="card-body">
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
+                [plugins]="barChartPlugins" [legend]="barChartLegend" [chartType]="barChartType" [colors]="barChartColors">
+            </canvas>
+        </div>
+    </div>
+</div>

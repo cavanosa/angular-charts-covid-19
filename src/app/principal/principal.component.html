@@ -1,0 +1,75 @@
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+  <h1 class="h2">Datos Covid-19</h1>
+  <form>
+    <div class="form-row d-flex justify-content-between">
+      <!-- FECHA DESDE -->
+      <div class="col-md-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </div>
+          <input type="text"
+          name="dateInit"
+           placeholder="Fecha Desde"
+           class="form-control"
+           bsDatepicker
+           [bsConfig]="{ isAnimated: true }"
+           [minDate]="minCovDate"
+           [maxDate]="dateEnd ? dateEnd : maxCovDate"
+           [(ngModel)]="dateInit"
+           (bsValueChange)="loadData($event)"
+           autocomplete="off">
+        </div>
+      </div>
+      <!-- FECHA hasta -->
+      <div class="col-md-4">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">
+              <i class="fas fa-calendar-alt"></i>
+            </div>
+          </div>
+          <input type="text"
+          name="dateEnd"
+           placeholder="Fecha Hasta"
+           class="form-control"
+           bsDatepicker
+           [bsConfig]="{ isAnimated: true }"
+           [maxDate]="maxCovDate"
+           [minDate]="dateInit ? dateInit : minCovDate"
+           [(ngModel)]="dateEnd"
+           (bsValueChange)="loadData($event)"
+           autocomplete="off">
+        </div>
+      </div>
+       <!-- PAISES -->
+       <div class="col-md-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">
+                  <i class="fas fa-globe"></i>
+              </div>
+            </div>
+            <select class="form-control" name="country" [(ngModel)]="country" (change)="loadData($event)">
+              <option [ngValue]="null" selected>Elige un País</option>
+              <option *ngFor="let country of countries" [ngValue]="country">{{country}}</option>
+            </select>
+          </div>
+        </div>
+    </div>
+  </form>
+</div>
+
+<div class="chart-wrapper">
+    <canvas baseChart
+    [datasets]="lineChartData"
+    [labels]="lineChartLabels"
+    [options]="lineChartOptions"
+    [colors]="lineChartColors"
+    [legend]="lineChartLegend"
+    [chartType]="lineChartType"
+    [plugins]="lineChartPlugins">
+  </canvas>
+</div>
